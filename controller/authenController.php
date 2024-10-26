@@ -1,8 +1,9 @@
 <?php
 include_once("../services/userService.php");
 
-class loginController
+class authenController
 {
+
 
     // injection
     public $userService;
@@ -17,15 +18,21 @@ class loginController
         if (isset($_POST["submit-login"])) {
             $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
             if ($user->getter_username() != null) {
-                include('../views/homepage.php');
+                return require('../views/homepage.php');
             } else {
-                $error = "Usernam or password not exist";
-                include('../views/login.php');
+                $error = "Username or password not exist";
+                return require('../views/login.php');
             }
         }
     }
+
+    public function logout()
+    {
+        return require('../views/login.php');
+    }
 };
 
+// $method = $_REQUEST["action"];
 
-$cLogin = new loginController();
-$cLogin->login();
+// $cLogin = new authenController();
+// $cLogin->$method();
