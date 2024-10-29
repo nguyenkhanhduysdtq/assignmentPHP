@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>Đăng ký</title>
 
     <!-- link CSS -->
     <link rel="stylesheet" href="../assets/css/globs.css">
     <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/register.css">
 
     <!-- Embed fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,45 +45,51 @@
             </nav>
 
             <div class="header-action">
-                <a href="./login.php" class="btn header-action__login">Sign In</a>
-                <a href="./register.php" class="header-action__signup">Sign Up</a>
+                <a href="./login.php" class="header-action__login">Sign In</a>
+                <a href="./register.php" class="btn header-action__signup">Sign Up</a>
             </div>
         </div>
     </header>
 
-    <div class="login">
-        <img src="../assets/images/img_login.png" alt="" class="login__img">
+    <div class="register">
+        <img src="../assets/images/img_register.png" alt="" class="register__img">
 
-        <form action="../navigation/index.php?layer=authen&&action=login" class="login__form" method="post">
-            <h3 class="login__form-heading">Sign In</h3>
+        <form action="../navigation/index.php?layer=authen&&action=signUp" class="register__form" method="post">
+            <h3 class="register__form-heading">Sign Up</h3>
 
             <?php
 
-            if (isset($_POST["submit-login"])) {
-                if ($error == "") {
+            if (isset($_POST["submit-register"])) {
+                if ($check == "") {
                     echo "";
                 } else {
-                    echo "<p style='color: red;'>$error</p>";
+                    echo "<p style='color: red;'>$check</p>";
                 }
             }
+
             ?>
 
-            <input type="text" name="username" placeholder="Username" class="login__input">
+            <input type="text" name="fullname" placeholder="Fullname" class="register__input">
 
-            <input type="password" name="password" placeholder="Password" class="login__input">
+            <input type="text" name="username" placeholder="Username" class="register__input">
 
-            <input type="submit" name="submit-login" value="Sign In" class="login__input login__input-submit">
+            <input type="password" name="password" placeholder="Password" class="register__input">
 
-            <div class="login__content">
-                <span class="login__question">You don't have an account?</span>
-                <a href="../views/register.php" name="link-register" class="login__content-link">Sign Up</a>
+            <input type="password" name="cfpass" placeholder="Confirm password" class="register__input">
+
+            <input type="submit" name="submit-register" value="Sign Up" class="register__input register__input-submit">
+
+            <div class="register__content">
+                <span class="register__question">Have an account?</span>
+                <a href="../views/login.php" name="link-login" class="register__content-link">Sign In</a>
             </div>
-        </form>
 
+
+        </form>
     </div>
     <?php
-    if (isset($_POST['link-register'])) {
-        header('location: register.php');
+    if (isset($_POST['link-login'])) {
+        header('Location: login.php');
     }
     ?>
 
