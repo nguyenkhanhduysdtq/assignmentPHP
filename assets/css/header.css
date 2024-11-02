@@ -31,7 +31,8 @@ body {
   color: #191b1d;
   font-size: 24px;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
+  /* 100% */
 }
 
 .navbar__list {
@@ -43,9 +44,10 @@ body {
 .navbar__item {
   display: inline-block;
   color: #4e5358;
-  font-size: 2.4rem;
+  font-size: 2.1rem;
   font-weight: 400;
-  line-height: 2.8rem; /* 175% */
+  line-height: 2.8rem;
+  /* 175% */
   margin-right: 42px;
   padding: 6px 8px;
 }

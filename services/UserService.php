@@ -2,6 +2,7 @@
 include_once("../repository/UserRepository.php");
 include_once("../models/user.php");
 include_once("../utills/connectDB.PHP");
+include_once("../utills/exception.php");
 
 class UserService implements userRepositoty
 {
@@ -34,7 +35,7 @@ class UserService implements userRepositoty
                 $user->setter_fullname($row["fullname"]);
                 $user->setter_modified_date($row["modified_date"]);
                 $user->setter_creat_date($row["creat_date"]);
-                $user->setter_role("2");
+                $user->setter_role("5");
             }
         } else {
             return $user;
@@ -44,8 +45,30 @@ class UserService implements userRepositoty
         return $user;
     }
 
+
+    public function checkExistUsername($username)
+    {
+        $user = new User();
+        $conn = $this->connectDB->openConnect();
+
+        $sql = "SELECT * FROM user WHERE username='$username'";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+
+
+        return $user;
+    }
+
     public function signUp($user, $cfPassword)
     {
+
+
         $userModel = new User();
 
         $userModel->setter_username($user->getter_username());
@@ -58,7 +81,7 @@ class UserService implements userRepositoty
 
         $conn = $this->connectDB->openConnect();
 
-        $sql = "INSERT INTO user (username,password,creat_date,modified_date,role,name,fullname)
+        $sql = "INSERT INTO user (username,password,creat_date,modified_date,role_id,name,fullname)
 
          VALUES ('{$userModel->getter_username()}', '{$userModel->getter_password()}','{$userModel->getter_creat_date()}',
          '{$userModel->getter_modified_date()}','{$userModel->getter_role()}','{$userModel->getter_name()}','{$userModel->getter_fullname()}'
@@ -66,28 +89,31 @@ class UserService implements userRepositoty
         ";
 
         if ($userModel->getter_username() == null) {
-            return 400;
+            return CustomErrorException::caseError->value;
         }
         if ($userModel->getter_password() == null) {
-            return 400;
+            return  CustomErrorException::caseError->value;
         }
 
         if ($userModel->getter_fullname() == null) {
-            return 400;
+            return  CustomErrorException::caseError->value;
         }
         if ($userModel->getter_password() == null) {
-            return 400;
+            return  CustomErrorException::caseError->value;
         }
 
         if ($user->getter_password() != $cfPassword) {
-            return 300;
+            return  CustomErrorException::passwordNotEqual->value;
         }
 
+        if ($this->checkExistUsername($userModel->getter_username()) == false) {
+            return CustomErrorException::ExistUsername->value;
+        }
 
         if ($conn->query($sql) === true) {
-            return 200;
+            return  CustomErrorException::success->value;
         } else {
-            return 400;
+            return  CustomErrorException::caseError->value;
         }
     }
 }
