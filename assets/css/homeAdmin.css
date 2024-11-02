@@ -84,8 +84,11 @@ label.radio input:checked+span {
     margin-top: 40px;
     width: 300px;
     height: 400px;
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 4 cột, mỗi cột chiếm 1 phần đều nhau */
+    gap: 140px;
+    /* Khoảng cách giữa các thẻ */
 }
 
 .row {
@@ -101,11 +104,83 @@ label.radio input:checked+span {
     border: none
 }
 
+.card-body {
+    margin-bottom: 20px;
+}
+
 .submit:hover {
-    background-color: aqua;
+    background-color: rgb(70, 174, 229);
+    color: white;
+}
+
+.add__major {
+    margin-top: 20px;
+    width: 150px;
+    height: 35px;
+    background-color: green;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.amend_title {
+    margin-bottom: 0px;
+}
+
+.submit_type {
+    display: flex;
+    justify-content: center;
+    /* Căn giữa các phần tử con theo chiều ngang */
+    gap: 10px;
+    /* Khoảng cách giữa hai nút */
+}
+
+.activity_edit {
+    width: 50px;
+    height: 30px;
+    margin-top: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.activity_delete {
+    width: 50px;
+    height: 30px;
+    margin-top: 10px;
+    background-color: rgb(237, 69, 69);
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+
 }
 
 
+.list_function {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+}
+
 .title {
     margin-top: 40px;
+    text-align: center;
+}
+
+.submit_detail {
+    margin-top: 10px;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #039BE5;
+    border: none
+}
+
+.submit_detail:hover {
+    background-color: rgb(70, 174, 229);
+    color: white;
 }

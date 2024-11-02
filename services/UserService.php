@@ -35,7 +35,7 @@ class UserService implements userRepositoty
                 $user->setter_fullname($row["fullname"]);
                 $user->setter_modified_date($row["modified_date"]);
                 $user->setter_creat_date($row["creat_date"]);
-                $user->setter_role("5");
+                $user->setter_role($row["role_Id"]);
             }
         } else {
             return $user;

@@ -1,6 +1,7 @@
 <?php
 include_once("../services/userService.php");
 include_once("../models/user.php");
+include_once("../services/FieldService.php");
 
 session_start();
 ob_start();
@@ -13,10 +14,13 @@ class authenController
 {
     // injection
     public $userService;
+    public $fieldService;
+
 
     public function __construct()
     {
         $this->userService = new UserService();
+        $this->fieldService = new FieldService();
     }
 
     public function login()
@@ -32,7 +36,13 @@ class authenController
                 $account->setter_creat_date($user->getter_creat_date());
 
                 $_SESSION["user"] = $account;
-                return require('../views/homepage.php');
+
+                if ($user->getter_role() == 5) {
+                    return require('../views/homepage.php');
+                } else if ($user->getter_role() == 1) {
+                    $listField = $this->fieldService->getAllField();
+                    return require('../views/homepageAdmin.php');
+                }
             } else {
                 $error = " * Username or password not exist";
                 return require('../views/login.php');
