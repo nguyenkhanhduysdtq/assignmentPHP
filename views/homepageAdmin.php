@@ -26,14 +26,12 @@
             <nav class="navbar">
                 <ul class="navbar__list">
                     <li>
-                        <a href="#!" class="navbar__item">Item 1</a>
+                        <a href="#!" class="navbar__item">Phân tài khoản giáo viên</a>
                     </li>
                     <li>
-                        <a href="#!" class="navbar__item">Quản lý </a>
+                        <a href="#!" class="navbar__item">Xét hồ sơ</a>
                     </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Thông tin tài khoản</a>
-                    </li>
+
                     <li>
                         <a href="#!" class="navbar__item">Xem thông tin cá nhân</a>
                     </li>
@@ -54,7 +52,7 @@
     <div class="container mt-5 mb-5 d-flex justify-content-center">
 
         <h5 class="information1 amend_title">* Thêm ngành</h5>
-        <input type="submit" class="add__major" name="add__major" value="Thêm ngành xét tuyển">
+        <a href="../navigation/index.php?layer=group&&action=getGroup"><input type="submit" class="add__major" name="add__major" value="Thêm ngành xét tuyển"></a>
 
         <h1 class="title">Danh sách các ngành xét tuyển</h1>
 
@@ -63,56 +61,62 @@
             <?php
             foreach ($listField as $field) {
             ?>
-                <div class="card-body">
+                <form action="../navigation/index.php?layer=field&&action=deleteField" method="post">
+                    <div class="card-body">
 
-                    <div class="list_function">
-                        <div>
-                            <h5 class="information1">* Trạng thái</h5>
+                        <div class="list_function">
+                            <div>
+                                <h5 class="information1">* Trạng thái</h5>
+                            </div>
+
+                            <div class="submit_type">
+                                <input class="activity_edit" name="edit" type="submit" value="sửa">
+                                <input class="activity_delete" name="delete" type="submit" value="xóa">
+                            </div>
+
                         </div>
 
-                        <div class="submit_type">
-                            <input class="activity_edit" type="submit" value="sửa">
-                            <input class="activity_delete" type="submit" value="xóa">
+                        <div class="d-flex flex-row activity">
+                            <label class="radio mr-1">
+                                <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '1' ? 'checked' : ''; ?>>
+                                <span><i class="fa fa-user"></i> Mở</span>
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '0' ? 'checked' : ''; ?>>
+                                <span><i class="fa fa-plus-circle"></i> Đóng</span>
+                            </label>
                         </div>
-                    </div>
 
-                    <div class="d-flex flex-row activity">
-                        <label class="radio mr-1">
-                            <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '1' ? 'checked' : ''; ?>>
-                            <span><i class="fa fa-user"></i> Mở</span>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '0' ? 'checked' : ''; ?>>
-                            <span><i class="fa fa-plus-circle"></i> Đóng</span>
-                        </label>
-                    </div>
 
-                    <h5 class="information1">* Thông tin chi tiết</h5>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <p>Ngành: <?php echo htmlspecialchars($field->getter_nameField()); ?></p>
+                        <h5 class="information1">* Thông tin chi tiết</h5>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <p>Ngành: <?php echo htmlspecialchars($field->getter_nameField()); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <p>Khối: <?php echo htmlspecialchars($field->getter_group()->getter_nameGroup()); ?></p>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <p>Khối: <?php echo htmlspecialchars($field->getter_group()->getter_nameGroup()); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <p>Ngày kết thúc: <?php echo htmlspecialchars($field->getter_end_time()); ?></p>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <p>Ngày kết thúc: <?php echo htmlspecialchars($field->getter_end_time()); ?></p>
+                                </div>
                             </div>
                         </div>
+
+                        <button class="submit">Nộp hồ sơ</button>
+                        <button class="submit_detail">Xem thông tin chi tiết</button>
                     </div>
 
-                    <button class="submit">Nộp hồ sơ</button>
-                    <button class="submit_detail">Xem thông tin chi tiết</button>
-                </div>
+                    <input type="hidden" name="value_id" value="<?php echo $field->getter_id(); ?>">
+                </form>
             <?php
             }
             ?>

@@ -1,5 +1,5 @@
 body {
-    background-color: #FFEBEE
+    background-color: white
 }
 
 .card {
@@ -183,4 +183,9 @@ label.radio input:checked+span {
 .submit_detail:hover {
     background-color: rgb(70, 174, 229);
     color: white;
+}
+
+
+.container {
+    padding-top: 150px;
 }
