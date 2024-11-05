@@ -47,6 +47,10 @@ class authenController
                 $error = " * Username or password not exist";
                 return require('../views/login.php');
             }
+        } else {
+            if (isset($_SESSION["user"]) && $_SESSION["user"]->getter_username() == null) {
+                return require('../views/login.php');
+            }
         }
     }
 

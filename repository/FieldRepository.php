@@ -7,6 +7,10 @@ interface  FieldRepository
     public function deleteField($id);
     public function getFieldStatusoff();
     public function updateField($field);
+    public function getFieldEdit($id);
+    public function editField($id);
+
+
 }
 
 

@@ -141,4 +141,60 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
 
         return false;
     }
+
+
+    public function getFieldEdit($id)
+    {
+        $conn = $this->connectDB->openConnect();
+
+        $sql = "SELECT * FROM field where id =$id";
+
+        $field = new Field();
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows != 0) {
+            while ($row = $result->fetch_assoc()) {
+                $field->setter_id($row["id"]);
+                $field->setter_nameField($row["name_field"]);
+                $field->setter_end_time($row["end_time"]);
+                $field->setter_start_time($row["start_time"]);
+
+
+                $group = new Group();
+                $getGroupSql = "SELECT * from exam_groups WHERE id ={$row['group_id']} ";
+                $resultGroup = $conn->query($getGroupSql);
+                $rowGroup = $resultGroup->fetch_assoc();
+                $group->setter_id($rowGroup["id"]);
+                $group->setter_nameGroup($rowGroup["name_group"]);
+                $group->setter_subject_one($rowGroup["subject_one"]);
+                $group->setter_subject_two($rowGroup["subject_two"]);
+                $group->setter_subject_three($rowGroup["subject_three"]);
+
+
+                $field->setter_group($group);
+            }
+        }
+
+        return $field;
+    }
+
+
+
+    public function editField($field)
+    {
+        $conn = $this->connectDB->openConnect();
+
+        $id = $field->getter_id();
+
+        $sql = "UPDATE field SET start_time='{$field->getter_start_time()}',end_time='{$field->getter_end_time()}',group_id='{$field->getter_group()}' WHERE id=$id ";
+
+        $result = $conn->query($sql);
+
+        if ($result === true) {
+            return true;
+        }
+
+        return false;
+    }
 }

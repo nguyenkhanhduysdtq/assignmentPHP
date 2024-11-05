@@ -109,8 +109,9 @@ label.radio input:checked+span {
 }
 
 .submit:hover {
-    background-color: rgb(70, 174, 229);
+    background-color: rgb(4, 69, 104);
     color: white;
+    cursor: pointer;
 }
 
 .add__major {
@@ -121,6 +122,11 @@ label.radio input:checked+span {
     border: none;
     color: white;
     border-radius: 5px;
+}
+
+.add__major:hover {
+    cursor: pointer;
+    background-color: rgb(3, 85, 3);
 }
 
 .amend_title {
@@ -143,6 +149,18 @@ label.radio input:checked+span {
     color: white;
     border: none;
     border-radius: 5px;
+
+}
+
+.activity_edit:hover {
+    cursor: pointer;
+    background-color: rgb(3, 85, 3);
+
+}
+
+.activity_delete:hover {
+    cursor: pointer;
+    background-color: rgb(130, 5, 5);
 
 }
 
@@ -181,8 +199,9 @@ label.radio input:checked+span {
 }
 
 .submit_detail:hover {
-    background-color: rgb(70, 174, 229);
+    background-color: rgb(4, 69, 104);
     color: white;
+    cursor: pointer;
 }
 
 

@@ -39,12 +39,27 @@
             </nav>
 
             <div class="header-action">
-                <?php
-                if (isset($_SESSION["user"])) {
-                    echo "<p>{$_SESSION['user']->getter_fullname()}</p>";
-                }
 
-                ?>
+                <!-- dropdown -->
+                <input class="dark-light" type="checkbox" id="dark-light" name="dark-light" />
+                <label for="dark-light"></label>
+
+                <div class="light-back"></div>
+
+
+                <div class="sec-center">
+                    <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
+                    <label class="for-dropdown" for="dropdown"><?php if (isset($_SESSION["user"])) {
+                                                                    echo "<p>{$_SESSION['user']->getter_fullname()}</p>";
+                                                                } ?> <i class="uil uil-arrow-down"></i></label>
+                    <div class="section-dropdown">
+
+
+                        <a href="../navigation/index.php?layer=authen&&action=logout" class="for-dropdown-sub">Đăng xuất<i class="uil uil-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- dropdown -->
             </div>
         </div>
     </header>
@@ -61,7 +76,7 @@
             <?php
             foreach ($listField as $field) {
             ?>
-                <form action="../navigation/index.php?layer=field&&action=deleteField" method="post">
+                <form action="../navigation/index.php?layer=field&&action=editField" method="post">
                     <div class="card-body">
 
                         <div class="list_function">

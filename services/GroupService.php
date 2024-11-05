@@ -1,7 +1,7 @@
 <?php
-include("../repository/GroupRepository.php");
-include("../utills/connectDB.PHP");
-include("../models/Group.php");
+include_once("../repository/GroupRepository.php");
+include_once("../utills/connectDB.PHP");
+include_once("../models/Group.php");
 
 class GroupService implements GroupRepository
 {
