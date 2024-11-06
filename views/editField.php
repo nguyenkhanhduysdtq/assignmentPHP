@@ -136,6 +136,25 @@
 
 
                 </select>
+                <label for="khoi-thi">Trạng thái:</label>
+                <select id="khoi-thi" name="status" required>
+                    <option value="1" <?php
+                                        if ($field->getter_status() == 1) {
+                                            echo "selected";
+                                        } else {
+                                            echo "";
+                                        }
+
+                                        ?>>Mở</option>
+                    <option value="0" <?php
+                                        if ($field->getter_status() == 0) {
+                                            echo "selected";
+                                        } else {
+                                            echo "";
+                                        }
+
+                                        ?>>Đóng</option>
+                </select>
             </div>
             <button type="submit" name="submit_edit" class="submit-btn">Xác nhận</button>
             <input type="hidden" name="value_id" value="<?php echo $field->getter_id(); ?>">

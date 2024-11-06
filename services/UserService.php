@@ -3,6 +3,7 @@ include_once("../repository/UserRepository.php");
 include_once("../models/user.php");
 include_once("../utills/connectDB.PHP");
 include_once("../utills/exception.php");
+include_once("../models/UserField.php");
 
 class UserService implements userRepositoty
 {
@@ -116,4 +117,89 @@ class UserService implements userRepositoty
             return  CustomErrorException::caseError->value;
         }
     }
+
+    public function getAccountTeacher()
+    {
+
+        $listUser = [];
+        $conn = $this->connectDB->openConnect();
+
+        $sql = "SELECT * FROM user WHERE role_id = 3";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $user = new User();
+
+                $user->setter_id($row["id"]);
+                $user->setter_name($row["name"]);
+                $user->setter_username($row["username"]);
+                $user->setter_fullname($row["fullname"]);
+                $user->setter_creat_date($row["creat_date"]);
+                $user->setter_modified_date($row["modified_date"]);
+
+                $listUser[] = $user;
+            }
+        }
+
+        return $listUser;
+    }
+
+
+    public function getOneUser($id)
+    {
+
+        $user = new User();
+        $conn = $this->connectDB->openConnect();
+
+        $sql = "SELECT * FROM user WHERE id = $id";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows != 0) {
+            while ($row = $result->fetch_assoc()) {
+                $user->setter_id($row["id"]);
+                $user->setter_name($row["name"]);
+                $user->setter_username($row["username"]);
+                $user->setter_fullname($row["fullname"]);
+                $user->setter_creat_date($row["creat_date"]);
+                $user->setter_modified_date($row["modified_date"]);
+            }
+        }
+        return $user;
+    }
+
+    public function getAssignUserAcceptField($username)
+    {
+
+        $conn = $this->connectDB->openConnect();
+
+        $listUserField = [];
+
+        $sql = "SELECT uf.id, user.username,field.name_field ,uf.assigned_at FROM user 
+                             JOIN user_field as uf on user.id = uf.user_id
+                              join field on uf.field_id = field.id
+                              where user.username = '{$username}'
+                              ";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $userField = new UserField();
+
+                $userField->setter_id($row["id"]);
+                $userField->setter_username($row["username"]);
+                $userField->setter_assigned_at($row["assigned_at"]);
+                $userField->setter_field_name($row["name_field"]);
+                $listUserField[] = $userField;
+            }
+
+            return $listUserField;
+        }
+        return [];
+    }
+
+   
 }

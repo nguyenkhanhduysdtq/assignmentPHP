@@ -106,6 +106,7 @@ class fieldController
             $start_date = $_POST["start_date"];
             $end_date = $_POST["end_date"];
             $group = $_POST["group"];
+            $status = $_POST["status"];
 
 
             $field = new Field();
@@ -114,6 +115,7 @@ class fieldController
             $field->setter_start_time($start_date);
             $field->setter_end_time($end_date);
             $field->setter_group($group);
+            $field->setter_status($status);
 
             $check = $this->fieldService->editField($field);
 

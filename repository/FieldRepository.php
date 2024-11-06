@@ -9,6 +9,7 @@ interface  FieldRepository
     public function updateField($field);
     public function getFieldEdit($id);
     public function editField($id);
+    public function getFieldNotAssigned($username);
 
 
 }

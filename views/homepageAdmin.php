@@ -26,7 +26,7 @@
             <nav class="navbar">
                 <ul class="navbar__list">
                     <li>
-                        <a href="#!" class="navbar__item">Phân tài khoản giáo viên</a>
+                        <a href="../navigation/index.php?layer=user&&action=getAccount" class="navbar__item">Phân tài khoản giáo viên</a>
                     </li>
                     <li>
                         <a href="#!" class="navbar__item">Xét hồ sơ</a>
@@ -93,11 +93,11 @@
 
                         <div class="d-flex flex-row activity">
                             <label class="radio mr-1">
-                                <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '1' ? 'checked' : ''; ?>>
+                                <input type="radio" name="<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '1' ? 'checked' : 'disabled'; ?>>
                                 <span><i class="fa fa-user"></i> Mở</span>
                             </label>
                             <label class="radio">
-                                <input type="radio" name="add_<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '0' ? 'checked' : ''; ?>>
+                                <input type="radio" name="<?php echo $field->getter_id(); ?>" value="<?php echo $field->getter_status(); ?>" <?php echo $field->getter_status() == '0' ? 'checked' : 'disabled'; ?>>
                                 <span><i class="fa fa-plus-circle"></i> Đóng</span>
                             </label>
                         </div>

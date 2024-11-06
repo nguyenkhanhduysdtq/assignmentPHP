@@ -187,7 +187,9 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
 
         $id = $field->getter_id();
 
-        $sql = "UPDATE field SET start_time='{$field->getter_start_time()}',end_time='{$field->getter_end_time()}',group_id='{$field->getter_group()}' WHERE id=$id ";
+        $sql = "UPDATE field SET start_time='{$field->getter_start_time()}',end_time='{$field->getter_end_time()}',group_id='{$field->getter_group()}'
+        
+        ,status = '{$field->getter_status()}' WHERE id=$id ";
 
         $result = $conn->query($sql);
 
@@ -196,5 +198,43 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
         }
 
         return false;
+    }
+
+    public function  getFieldNotAssigned($username)
+    {
+
+        $conn = $this->connectDB->openConnect();
+
+        $listField = [];
+
+        $sql = "SELECT distinct  field.name_field, field.id 
+                      from
+                        field 
+
+                      where field.id not in     
+                              (SELECT field.id
+                                  FROM 
+                                    user 
+                                  JOIN 
+                                    user_field as uf on user.id = uf.user_id
+                                  right join
+                                    field on uf.field_id = field.id
+                                where 
+                                    field.status = 1 and user.username ='{$username}' ) and field.status = 1;";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $field = new UserField();
+
+                $field->setter_id($row["id"]);
+                $field->setter_field_name($row["name_field"]);
+                $listField[] = $field;
+            }
+
+            return $listField;
+        }
+        return [];
     }
 }

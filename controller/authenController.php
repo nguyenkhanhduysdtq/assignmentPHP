@@ -25,6 +25,15 @@ class authenController
 
     public function login()
     {
+
+        if ($_SESSION["user"]->getter_username() != null) {
+            if ($_SESSION["user"]->getter_role() == 1) {
+                $listField = $this->fieldService->getAllField();
+                return require('../views/homepageAdmin.php');
+            }
+        }
+
+        
         if (isset($_POST["submit-login"])) {
             $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
             if ($user->getter_username() != null) {
