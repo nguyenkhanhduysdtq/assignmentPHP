@@ -6,6 +6,7 @@ class UploadFile
     private $fileType;
     private $fileSize;
     private $uploaded_at;
+    private $file_id;
 
 
 
@@ -62,5 +63,16 @@ class UploadFile
     public function setter_uploaded_at($uploaded_at)
     {
         $this->uploaded_at = $uploaded_at;
+    }
+
+    public function getter_file_id()
+    {
+        return $this->file_id;
+    }
+
+
+    public function setter_file_id($file_id)
+    {
+        $this->file_id = $file_id;
     }
 }

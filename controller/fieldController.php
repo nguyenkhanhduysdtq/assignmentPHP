@@ -130,4 +130,18 @@ class fieldController
             }
         }
     }
+
+
+    public function FieldTeacher()
+    {
+        $listField = $this->fieldService->getFieldDetailTeacher($_SESSION["user"]->getter_id());
+        return require('../views/homepage.php');
+    }
+
+
+    public function FieldStudent()
+    {
+        $listField = $this->fieldService->getFieldStatusOn();
+        return require('../views/homepage.php');
+    }
 }

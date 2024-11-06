@@ -1,0 +1,165 @@
+ /* Reset CSS cơ bản */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #f9f9f9;
+     color: #333;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+ }
+
+ h1 {
+     text-align: center;
+     color: #333;
+ }
+
+ .table-container {
+     max-width: 1200px;
+     width: 100%;
+     margin: 20px;
+     overflow-x: auto;
+     background-color: white;
+     padding: 20px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     border-radius: 8px;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 10px;
+ }
+
+ th,
+ td {
+     padding: 12px 15px;
+     /* Tăng độ rộng của các ô */
+     border: 1px solid #ddd;
+     text-align: center;
+ }
+
+ th {
+     background-color: #4CAF50;
+     color: white;
+     font-weight: bold;
+ }
+
+ tr:nth-child(even) {
+     background-color: #f2f2f2;
+ }
+
+ /* Đặt độ rộng cho từng cột */
+ th:nth-child(1) {
+     width: 5%;
+ }
+
+ th:nth-child(2) {
+     width: 15%;
+ }
+
+ th:nth-child(3) {
+     width: 12%;
+ }
+
+ th:nth-child(4) {
+     width: 10%;
+ }
+
+ th:nth-child(5) {
+     width: 15%;
+ }
+
+ th:nth-child(6) {
+     width: 10%;
+ }
+
+ th:nth-child(7) {
+     width: 20%;
+ }
+
+ th:nth-child(8) {
+     width: 20%;
+ }
+
+ .status-approved {
+     color: green;
+     font-weight: bold;
+ }
+
+ .status-pending {
+     color: orange;
+     font-weight: bold;
+ }
+
+ .status-rejected {
+     color: red;
+     font-weight: bold;
+ }
+
+ .btn3 {
+     padding: 8px 12px;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     text-decoration: none;
+     font-size: 14px;
+ }
+
+ .btn-approve {
+     background-color: #4CAF50;
+ }
+
+ .btn-reject {
+     background-color: #e74c3c;
+ }
+
+ .btn-details {
+     background-color: #3498db;
+ }
+
+ .btn:hover {
+     opacity: 0.9;
+ }
+
+ .navigation1 {
+     margin: 20px auto;
+     /* Khoảng cách giữa header và form */
+     text-align: left;
+     /* Căn trái hoặc thay đổi theo ý bạn */
+     width: 100px;
+     /* Đặt theo kích thước của .container nếu cần */
+     position: absolute;
+     margin-right: 100%;
+     margin-bottom: 25%;
+     margin-left: 130px;
+
+ }
+
+ .navigation__button {
+     background-color: rgb(0, 106, 255);
+     /* Sử dụng màu chủ đạo */
+     color: #fff;
+     /* Màu chữ */
+     padding: 10px 20px;
+     /* Khoảng cách bên trong nút */
+     border: none;
+     border-radius: 5px;
+     font-size: 1.6rem;
+     /* Đặt kích thước chữ theo root font-size */
+     font-weight: bold;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+     min-width: 150px;
+ }
+
+ .navigation__button:hover {
+     opacity: 0.8;
+ }

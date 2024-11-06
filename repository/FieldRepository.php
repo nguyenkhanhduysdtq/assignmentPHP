@@ -10,6 +10,8 @@ interface  FieldRepository
     public function getFieldEdit($id);
     public function editField($id);
     public function getFieldNotAssigned($username);
+    public function getFieldDetailTeacher($userId);
+    public function getFieldStatusOn();
 
 
 }

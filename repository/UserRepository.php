@@ -8,6 +8,7 @@ interface userRepositoty
     public function getAccountTeacher();
     public function getOneUser($id);
     public function getAssignUserAcceptField($username);
+    public function getInforUserAcceptField($id);
 
    
 }

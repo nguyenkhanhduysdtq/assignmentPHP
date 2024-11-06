@@ -33,11 +33,12 @@ class authenController
             }
         }
 
-        
+
         if (isset($_POST["submit-login"])) {
             $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
             if ($user->getter_username() != null) {
                 $account = new User();
+                $account->setter_id($user->getter_id());
                 $account->setter_username($user->getter_username());
                 $account->setter_name($user->getter_name());
                 $account->setter_fullname($user->getter_fullname());
@@ -46,18 +47,24 @@ class authenController
 
                 $_SESSION["user"] = $account;
 
-                if ($user->getter_role() == 5) {
-                    return require('../views/homepage.php');
-                } else if ($user->getter_role() == 1) {
+
+
+                if ($user->getter_role() == 1) {
                     $listField = $this->fieldService->getAllField();
                     return require('../views/homepageAdmin.php');
                 }
+
+                if ($user->getter_role() == 3) {
+                    $listField = $this->fieldService->getFieldDetailTeacher($user->getter_id());
+                    return require('../views/homepage.php');
+                }
+
+                if ($user->getter_role() == 5) {
+                    $listField = $this->fieldService->getFieldStatusOn();
+                    return require('../views/homepage.php');
+                }
             } else {
                 $error = " * Username or password not exist";
-                return require('../views/login.php');
-            }
-        } else {
-            if (isset($_SESSION["user"]) && $_SESSION["user"]->getter_username() == null) {
                 return require('../views/login.php');
             }
         }

@@ -107,21 +107,21 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <p>Ngành: <?php echo htmlspecialchars($field->getter_nameField()); ?></p>
+                                    <p><strong>Ngành: </strong><?php echo htmlspecialchars($field->getter_nameField()); ?></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <p>Khối: <?php echo htmlspecialchars($field->getter_group()->getter_nameGroup()); ?></p>
+                                    <p><strong>Khối:</strong> <?php echo htmlspecialchars($field->getter_group()->getter_nameGroup()); ?></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <p>Ngày kết thúc: <?php echo htmlspecialchars($field->getter_end_time()); ?></p>
+                                    <p><strong>Ngày kết thúc:</strong> <?php echo htmlspecialchars($field->getter_end_time()); ?></p>
                                 </div>
                             </div>
                         </div>

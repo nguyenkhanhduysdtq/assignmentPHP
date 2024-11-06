@@ -1,11 +1,12 @@
 <?php
-class FildProfile
+class FileProfile
 {
     private $id;
     private $user;
     private $field;
-    private $score;
-    private $uploadFile;
+    private $score_subject_one;
+    private $score_subject_two;
+    private $score_subject_three;
     private $status;
 
 
@@ -49,31 +50,42 @@ class FildProfile
         return $this->status;
     }
 
+    public function getter_score_subject_one()
+    {
+        return $this->score_subject_one;
+    }
+
+
+    public function setter_score_subject_one($score_subject_one)
+    {
+        $this->score_subject_one = $score_subject_one;
+    }
+
+    public function getter_score_subject_two()
+    {
+        return $this->score_subject_two;
+    }
+
+
+    public function setter_score_subject_two($score_subject_two)
+    {
+        $this->score_subject_two = $score_subject_two;
+    }
+
+    public function getter_score_subject_three()
+    {
+        return $this->score_subject_three;
+    }
+
+
+    public function setter_score_subject_three($score_subject_three)
+    {
+        $this->score_subject_three = $score_subject_three;
+    }
+
 
     public function setter_status($status)
     {
         $this->status = $status;
-    }
-
-    public function getter_score()
-    {
-        return $this->score;
-    }
-
-
-    public function setter_score($score)
-    {
-        $this->score = $score;
-    }
-
-    public function getter_upload_file()
-    {
-        return $this->uploadFile;
-    }
-
-
-    public function setter_upload_file($uploadFile)
-    {
-        $this->uploadFile = $uploadFile;
     }
 }

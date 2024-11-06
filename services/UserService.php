@@ -29,7 +29,7 @@ class UserService implements userRepositoty
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-
+                $user->setter_id($row["id"]);
                 $user->setter_username($row["username"]);
                 $user->setter_password($row["password"]);
                 $user->setter_name($row["name"]);
@@ -201,5 +201,28 @@ class UserService implements userRepositoty
         return [];
     }
 
-   
+
+    public function getInforUserAcceptField($id)
+    {
+        $conn = $this->connectDB->openConnect();
+
+        $user = new User();
+        $sql = " SELECT user.id ,user.fullname
+
+                   from user join user_field as uf on user.id = uf.user_id 
+                             join field on uf.field_id = field.id
+
+                where  uf.field_id ='{$id}'";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+
+                $user->setter_id($row["id"]);
+                $user->setter_fullname($row["fullname"]);
+            }
+        }
+        return $user;
+    }
 }
