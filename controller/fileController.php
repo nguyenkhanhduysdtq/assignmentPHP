@@ -33,6 +33,9 @@ class fileController
     public function getfileOfField()
     {
         if (isset($_POST["submit"])) {
+            $fieldId = $_POST["value_id"];
+            $fildeDetail = $this->fileService->getFileDetailField($fieldId);
+            $userAccept = $_SESSION["user"]->getter_fullname();
             return require('../views/detailFile.php');
         }
 
@@ -153,6 +156,23 @@ class fileController
             } else {
                 return require('../views/test1.php');
             }
+        }
+    }
+
+    public function fileDetail()
+    {
+        if (isset($_POST["submit_st"])) {
+            $userId = $_SESSION["user"]->getter_id();
+            $fieldId = $_POST["value_id"];
+            $fileDetail = $this->fileService->getInforDetail($userId, $fieldId);
+            return require('../views/viewDetailInforStudent.php');
+        }
+
+        if (isset($_POST["submit_tc"])) {
+            $fieldId = $_POST["value_id"];
+            $userId = $_POST["value_user_id"];
+            $fileDetail = $this->fileService->getInforDetail($userId, $fieldId);
+            return require('../views/viewDetailInforStudent.php');
         }
     }
 }

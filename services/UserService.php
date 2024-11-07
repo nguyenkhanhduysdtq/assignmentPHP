@@ -78,7 +78,7 @@ class UserService implements userRepositoty
         $userModel->setter_modified_date($user->getter_modified_date());
         $userModel->setter_name($user->getter_name());
         $userModel->setter_fullname($user->getter_fullname());
-        $userModel->setter_role(2);
+        $userModel->setter_role(5);
 
         $conn = $this->connectDB->openConnect();
 

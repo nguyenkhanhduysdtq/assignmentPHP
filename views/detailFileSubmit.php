@@ -179,38 +179,43 @@
 </div>
 
 <body>
-    <div class="profile-card">
-        <h2>Hồ Sơ Đăng ký</h2>
-        <p style="margin-bottom: 30px;"><Strong style="color: red;">* Bạn đã nộp hồ sơ không thể sửa</Strong></p>
-        <div class=" profile-info">
-            <div><span class="label">Họ Tên Học Sinh: </span><?php echo $fildeDetail->fullname ?></div>
-            <div><span class="label">Tên Ngành Nộp Hồ Sơ: </span> <?php echo $fildeDetail->name_field ?></div>
-            <div><span class="label">Tên Khối Xét Hồ Sơ: </span> <?php echo $fildeDetail->group->getter_nameGroup() ?></div>
-            <div><span class="label">Tên Người Duyệt Hồ Sơ: </span><?php echo $user->getter_fullname() ?></div>
-            <div><span class="label">Trạng Thái Hồ Sơ:</span> <span class="status <?php
+    <form action="../navigation/index.php?layer=file&&action=fileDetail" method="post">
+        <div class="profile-card">
+            <h2>Hồ Sơ Đăng ký</h2>
+            <p style="margin-bottom: 30px;"><Strong style="color: red;">* Bạn đã nộp hồ sơ không thể sửa</Strong></p>
+            <div class=" profile-info">
+                <div><span class="label">Họ Tên Học Sinh: </span><?php echo $fildeDetail->fullname ?></div>
+                <div><span class="label">Tên Ngành Nộp Hồ Sơ: </span> <?php echo $fildeDetail->name_field ?></div>
+                <div><span class="label">Tên Khối Xét Hồ Sơ: </span> <?php echo $fildeDetail->group->getter_nameGroup() ?></div>
+                <div><span class="label">Tên Người Duyệt Hồ Sơ: </span><?php echo $user->getter_fullname() ?></div>
+                <div><span class="label">Trạng Thái Hồ Sơ:</span> <span class="status <?php
 
-                                                                                    if ($fildeDetail->status == 0) {
-                                                                                        echo "pending";
-                                                                                    } else if ($fildeDetail->status == 1) {
-                                                                                        echo "approved";
-                                                                                    } else {
-                                                                                        echo "rejected";
-                                                                                    }
+                                                                                        if ($fildeDetail->status == 0) {
+                                                                                            echo "pending";
+                                                                                        } else if ($fildeDetail->status == 1) {
+                                                                                            echo "approved";
+                                                                                        } else {
+                                                                                            echo "rejected";
+                                                                                        }
 
 
-                                                                                    ?>"><?php
-                if ($fildeDetail->status == 0) {
-                    echo "Chưa duyệt";
-                } else if ($fildeDetail->status == 1) {
-                    echo "đã duyệt";
-                } else {
-                    echo "Hồ sơ đã bị xóa";
-                }
+                                                                                        ?>"><?php
+                                                                                            if ($fildeDetail->status == 0) {
+                                                                                                echo "Chưa duyệt";
+                                                                                            } else if ($fildeDetail->status == 1) {
+                                                                                                echo "đã duyệt";
+                                                                                            } else {
+                                                                                                echo "Hồ sơ đã bị xóa";
+                                                                                            }
 
-                ?></span></div>
+                                                                                            ?></span></div>
+            </div>
+            <button class="btn-view" name="submit_st">xem chi tiết</button>
         </div>
-        <button class="btn-view" name="submit">xem chi tiết</button>
-    </div>
+
+        <input type="hidden" name="value_id" value="<?php echo $fieldId ?>">
+
+    </form>
 </body>
 
 </html>

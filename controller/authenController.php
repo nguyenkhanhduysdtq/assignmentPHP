@@ -88,7 +88,7 @@ class authenController
             $user->setter_fullname($_POST["fullname"]);
             $user->setter_username($_POST["username"]);
             $user->setter_password($_POST["password"]);
-            $user->setter_role(2);
+            $user->setter_role(5);
             $user->setter_creat_date(date("Y-m-d"));
 
 

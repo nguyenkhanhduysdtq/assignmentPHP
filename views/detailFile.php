@@ -53,75 +53,82 @@
         <a href="../navigation/index.php?layer=field&&action=FieldTeacher"><input type="submit" class="navigation__button" value="Trở về" name="navigation"></a>
     </div>
 
-    <form action="" method="post">
-        <div class="table-container">
-            <h1>Bảng hồ sơ học sinh</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Họ tên học sinh</th>
-                        <th>Tên ngành nộp hồ sơ</th>
-                        <th>Tên khối xét hồ sơ</th>
-                        <th>Tên người duyệt hồ sơ</th>
-                        <th>Trạng thái hồ sơ</th>
-                        <th>Thao tác</th>
-                        <th>Chi tiết hồ sơ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Row 1 Example -->
-                    <tr>
-                        <td>1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Khoa học Máy tính</td>
-                        <td>A01</td>
-                        <td>Nguyễn Thị B</td>
-                        <td><span class="status-approved">Đã duyệt</span></td>
-                        <td>
-                            <button class="btn3 btn-approve">Duyệt</button>
-                            <button class="btn3 btn-reject">Không duyệt</button>
-                        </td>
-                        <td>
-                            <a href="student_detail.html?id=1" class="btn3 btn-details">Xem chi tiết</a>
-                        </td>
-                    </tr>
-                    <!-- Row 2 Example -->
-                    <tr>
-                        <td>2</td>
-                        <td>Trần Thị C</td>
-                        <td>Kinh tế</td>
-                        <td>D01</td>
-                        <td>Nguyễn Văn D</td>
-                        <td><span class="status-pending">Chưa duyệt</span></td>
-                        <td>
-                            <button class="btn3 btn-approve">Duyệt</button>
-                            <button class="btn3 btn-reject">Không duyệt</button>
-                        </td>
-                        <td>
-                            <a href="student_detail.html?id=2" class="btn3 btn-details">Xem chi tiết</a>
-                        </td>
-                    </tr>
-                    <!-- Row 3 Example -->
-                    <tr>
-                        <td>3</td>
-                        <td>Phạm Văn E</td>
-                        <td>Quản trị Kinh doanh</td>
-                        <td>C02</td>
-                        <td>Lê Thị F</td>
-                        <td><span class="status-rejected">Không duyệt</span></td>
-                        <td>
-                            <button class="btn3 btn-approve">Duyệt</button>
-                            <button class="btn3 btn-reject">Không duyệt</button>
-                        </td>
-                        <td>
-                            <a href="student_detail.html?id=3" class="btn3 btn-details">Xem chi tiết</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
+
+    <div class="table-container">
+        <h1>Bảng hồ sơ học sinh</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ tên học sinh</th>
+                    <th>Tên ngành nộp hồ sơ</th>
+                    <th>Tên khối xét hồ sơ</th>
+                    <th>Tên người duyệt hồ sơ</th>
+                    <th>Trạng thái hồ sơ</th>
+                    <th>Thao tác</th>
+                    <th>Chi tiết hồ sơ</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php
+                $count = 1;
+                foreach ($fildeDetail as $file) {
+                ?>
+
+                    <form action="../navigation/index.php?layer=file&&action=fileDetail" method="post">
+                        <!-- Row 1 Example -->
+                        <tr>
+                            <td>
+                                <?php echo $count++ ?>
+                            </td>
+                            <td><?php echo $file->fullname ?></td>
+                            <td><?php echo $file->name_field ?></td>
+                            <td><?php echo $file->group->getter_nameGroup() ?></td>
+                            <td><?php echo $userAccept ?></td>
+                            <td><span class="<?php
+                                                if ($file->status == 0) {
+                                                    echo "status-pending";
+                                                } else if ($file->status == 1) {
+                                                    echo "status-approved";
+                                                } else {
+                                                    echo "status-rejected";
+                                                }
+
+                                                ?>">
+                                    <?php
+                                    if ($file->status == 0) {
+                                        echo "Chưa duyệt";
+                                    } else if ($file->status == 1) {
+                                        echo "Đã duyệt";
+                                    } else {
+                                        echo "Không duyệt";
+                                    }
+
+                                    ?>
+                                </span></td>
+                            <td>
+                                <button class="btn3 btn-approve">Duyệt</button>
+                                <button class="btn3 btn-reject">Không duyệt</button>
+                            </td>
+                            <td>
+
+                                <button name="submit_tc" class="btn3 btn-details">Xem chi tiết</button>
+
+                            </td>
+                            <input type="hidden" name="value_id" value="<?php echo $fieldId ?>">
+                            <input type="hidden" name="value_user_id" value="<?php echo $file->user_id ?>">
+                        </tr>
+                    </form>
+                <?php
+                }
+                ?>
+
+
+            </tbody>
+        </table>
+    </div>
+
 
 </body>
 
