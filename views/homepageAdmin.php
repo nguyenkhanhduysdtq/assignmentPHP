@@ -126,7 +126,7 @@
                             </div>
                         </div>
 
-                        <button class="submit">Nộp hồ sơ</button>
+                        <button class="submit" name="submitDetail">Nộp hồ sơ</button>
                         <button class="submit_detail">Xem thông tin chi tiết</button>
                     </div>
 

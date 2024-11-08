@@ -8,6 +8,8 @@ class FileProfile
     private $score_subject_two;
     private $score_subject_three;
     private $status;
+    private $date_review;
+    private $date_modified;
 
 
 
@@ -45,10 +47,7 @@ class FileProfile
         $this->field = $field;
     }
 
-    public function getter_status()
-    {
-        return $this->status;
-    }
+
 
     public function getter_score_subject_one()
     {
@@ -83,9 +82,32 @@ class FileProfile
         $this->score_subject_three = $score_subject_three;
     }
 
+    public function getter_status()
+    {
+        return $this->status;
+    }
 
     public function setter_status($status)
     {
         $this->status = $status;
+    }
+    public function getter_date_review()
+    {
+        return $this->date_review;
+    }
+
+    public function setter_date_review($date)
+    {
+        $this->date_review = $date;
+    }
+
+    public function getter_date_modified()
+    {
+        return $this->date_modified;
+    }
+
+    public function setter_date_modified($date)
+    {
+        $this->date_modified = $date;
     }
 }

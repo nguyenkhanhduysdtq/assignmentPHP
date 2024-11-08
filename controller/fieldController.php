@@ -3,6 +3,8 @@ include_once("../services/FieldService.php");
 include_once("../models/Field.php");
 include_once("../models/user.php");
 include_once("../services/GroupService.php");
+include_once("../services/FileService.php");
+include_once("../services/UserService.php");
 
 
 session_start();
@@ -15,12 +17,15 @@ class fieldController
 
     public $fieldService;
     public $groupService;
-
+    public $fileService;
+    public $userService;
 
     public function __construct()
     {
         $this->fieldService = new FieldService();
         $this->groupService = new GroupService();
+        $this->fileService = new FileService();
+        $this->userService = new UserService();
     }
 
 
@@ -94,6 +99,14 @@ class fieldController
                 $listGroup = $this->groupService->getAllGroup();
                 return require('../views/editField.php');
             }
+        }
+
+
+        if (isset($_POST["submitDetail"]) || $_SESSION["user"]->getter_role() == 1) {
+            $fieldId = $_POST["value_id"];
+            $fildeDetail = $this->fileService->getFileDetailField($fieldId);
+            $user = $this->userService->getInforUserAcceptField($fieldId);
+            return require('../views/detailFile.php');
         }
     }
 

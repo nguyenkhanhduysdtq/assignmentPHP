@@ -159,6 +159,7 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
                 $field->setter_nameField($row["name_field"]);
                 $field->setter_end_time($row["end_time"]);
                 $field->setter_start_time($row["start_time"]);
+                $field->setter_status($row["status"]);
 
 
                 $group = new Group();
@@ -318,6 +319,4 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
         }
         return $listField;
     }
-
-    
 }

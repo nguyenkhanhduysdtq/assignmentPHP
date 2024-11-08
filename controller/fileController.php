@@ -32,14 +32,14 @@ class fileController
 
     public function getfileOfField()
     {
-        if (isset($_POST["submit"])) {
+        if (isset($_POST["submit"]) || $_SESSION["user"]->getter_role() == 3) {
             $fieldId = $_POST["value_id"];
             $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             $userAccept = $_SESSION["user"]->getter_fullname();
             return require('../views/detailFile.php');
         }
 
-        if (isset($_POST["submit_t"])) {
+        if (isset($_POST["submit_t"]) || $_SESSION["user"]->getter_role() == 5) {
             $fieldId = $_POST["value_id"];
             $userId = $_SESSION["user"]->getter_id();
 
@@ -173,6 +173,20 @@ class fileController
             $userId = $_POST["value_user_id"];
             $fileDetail = $this->fileService->getInforDetail($userId, $fieldId);
             return require('../views/viewDetailInforStudent.php');
+        }
+
+        if (isset($_POST["activeAcceptFile"])) {
+            $status = $_POST["activeAcceptFile"];
+            $fieldId = $_POST["value_id"];
+            $userId = $_POST["value_user_id"];
+            $fileId = $_POST["value_file_id"];
+            $fildeDetail = $this->fileService->getFileDetailField($fieldId);
+            $user = $this->userService->getInforUserAcceptField($fieldId);
+            $check = $this->fileService->updateStatusFile($userId, $fieldId, $status, $fileId);
+
+            if ($check == true) {
+                return require('../views/detailFile.php');
+            }
         }
     }
 }

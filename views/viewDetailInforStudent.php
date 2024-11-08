@@ -79,6 +79,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             min-width: 150px;
+
         }
 
         /* Hiệu ứng khi rê chuột vào nút */
@@ -93,9 +94,17 @@
             /* Căn trái hoặc thay đổi theo ý bạn */
             width: 100px;
             /* Đặt theo kích thước của .container nếu cần */
+
+            /* margin-right: 100%;
+            margin-bottom: 400px;
+            marg
+            in-left: 150px; */
+        }
+
+        .wrapper {
             position: absolute;
             margin-right: 100%;
-            margin-bottom: 400px;
+            margin-bottom: 300px;
             margin-left: 150px;
         }
     </style>
@@ -137,9 +146,32 @@
     </div>
 </header>
 
-<div class="navigation1">
-    <a href="../navigation/index.php?layer=field&&action=FieldTeacher"><input type="submit" class="navigation__button" value="Trở về" name="navigation"></a>
-</div>
+<form class="wrapper" action="../navigation/index.php?layer=<?php
+                                                            if ($_SESSION["user"]->getter_role() == 3) {
+                                                                echo "file";
+                                                            } else if ($_SESSION["user"]->getter_role() == 1 || $_SESSION["user"]->getter_role() == 5) {
+                                                                echo "field";
+                                                            }
+
+                                                            ?>&&action=<?php
+                                                                        if ($_SESSION["user"]->getter_role() == 3) {
+                                                                            echo "getfileOfField";
+                                                                        }
+                                                                        if ($_SESSION["user"]->getter_role() == 1) {
+                                                                            echo "editField";
+                                                                        }
+
+                                                                        if ($_SESSION["user"]->getter_role() == 5) {
+                                                                            echo "FieldStudent";
+                                                                        }
+
+                                                                        ?>" method="post">
+    <div class="navigation1">
+        <a><input type="submit" class="navigation__button" value="Trở về" name="navigation"></a>
+    </div>
+    <input type="hidden" value="<?php echo $fieldId ?>" name="value_id">
+
+</form>
 
 
 <body>

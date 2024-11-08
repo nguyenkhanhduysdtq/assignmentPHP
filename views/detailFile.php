@@ -50,7 +50,14 @@
 <body>
 
     <div class="navigation1">
-        <a href="../navigation/index.php?layer=field&&action=FieldTeacher"><input type="submit" class="navigation__button" value="Trở về" name="navigation"></a>
+        <a href="../navigation/index.php?layer=field&&action=<?php
+                                                                if ($_SESSION["user"]->getter_role() == 3) {
+                                                                    echo "FieldTeacher";
+                                                                } else if ($_SESSION["user"]->getter_role() == 1) {
+                                                                    echo "dataHomepage";
+                                                                }
+
+                                                                ?>"><input type="submit" class="navigation__button" value="Trở về" name="navigation"></a>
     </div>
 
 
@@ -66,6 +73,18 @@
                     <th>Tên người duyệt hồ sơ</th>
                     <th>Trạng thái hồ sơ</th>
                     <th>Thao tác</th>
+                    <th>Xóa hồ sơ</th>
+
+
+                    <!-- <?php
+                            if ($_SESSION["user"]->getter_role() == 1) {
+                            ?>
+                       <th>Xóa hồ sơ</th>
+
+                     <?php
+                            }
+                        ?> -->
+
                     <th>Chi tiết hồ sơ</th>
                 </tr>
             </thead>
@@ -85,7 +104,16 @@
                             <td><?php echo $file->fullname ?></td>
                             <td><?php echo $file->name_field ?></td>
                             <td><?php echo $file->group->getter_nameGroup() ?></td>
-                            <td><?php echo $userAccept ?></td>
+                            <td><?php
+
+                                if ($_SESSION["user"]->getter_role() == 3) {
+                                    echo $userAccept;
+                                } else {
+                                    echo $user->getter_fullname();
+                                }
+
+
+                                ?></td>
                             <td><span class="<?php
                                                 if ($file->status == 0) {
                                                     echo "status-pending";
@@ -108,8 +136,28 @@
                                     ?>
                                 </span></td>
                             <td>
-                                <button class="btn3 btn-approve">Duyệt</button>
-                                <button class="btn3 btn-reject">Không duyệt</button>
+                                <button name="activeAcceptFile" value="1" class="btn3 btn-approve">Duyệt</button>
+                                <button name="activeAcceptFile" value="0" class="btn3 btn-pending">Không duyệt</button>
+
+                            </td>
+                            <td>
+                                <?php
+                                if ($_SESSION["user"]->getter_role() == 1) {
+                                ?>
+                                    <button name="activeAcceptFile" value="2" class="btn3 btn-reject">Xóa</button>
+
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+                                if ($_SESSION["user"]->getter_role() == 3) {
+                                ?>
+                                    <button disabled class="btn3 btn-reject">Xóa</button>
+
+                                <?php
+                                }
+                                ?>
                             </td>
                             <td>
 
@@ -118,6 +166,7 @@
                             </td>
                             <input type="hidden" name="value_id" value="<?php echo $fieldId ?>">
                             <input type="hidden" name="value_user_id" value="<?php echo $file->user_id ?>">
+                            <input type="hidden" name="value_file_id" value="<?php echo $file->file_id ?>">
                         </tr>
                     </form>
                 <?php
