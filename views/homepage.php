@@ -100,15 +100,45 @@
                             </div>
                         </div>
 
-                        <button class="submit" name="<?php
+                        <button style="color: <?php $endDateTime = new DateTime($field->getter_end_time());
+                                                $currentDateTime = new DateTime();
+                                                if ($endDateTime <  $currentDateTime) {
+                                                    echo "red;";
+                                                    echo  "cursor: not-allowed;";
+                                                } else {
+                                                    echo "";
+                                                } ?>;  "
 
-                                                        if ($_SESSION["user"]->getter_role() == 3) {
-                                                            echo "submit";
-                                                        } else {
-                                                            echo "submit_t";
-                                                        }
+                            class="submit" <?php
+                                            $endDateTime = new DateTime($field->getter_end_time());
+                                            $currentDateTime = new DateTime();
+                                            if ($endDateTime <  $currentDateTime) {
+                                                echo "disabled";
+                                            } else {
+                                                echo "";
+                                            }
 
-                                                        ?>">Nộp hồ sơ</button>
+                                            ?>
+
+                            name="<?php
+
+                                    if ($_SESSION["user"]->getter_role() == 3) {
+                                        echo "submit";
+                                    } else {
+                                        echo "submit_t";
+                                    }
+
+                                    ?>">
+                            <?php
+                            $endDateTime = new DateTime($field->getter_end_time());
+                            $currentDateTime = new DateTime();
+                            if ($endDateTime >  $currentDateTime) {
+                                echo "Nộp hồ sơ";
+                            } else {
+                                echo "Đã hết hạn";
+                            }
+
+                            ?></button>
                     </div>
 
                     <input type="hidden" name="value_id" value="<?php echo $field->getter_id(); ?>">
