@@ -319,4 +319,47 @@ VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', 
         }
         return $listField;
     }
+
+
+    public function statiscicalStatusOffile()
+    {
+        $listField = [];
+        $conn = $this->connectDB->openConnect();
+        $sql = " SELECT f.id,f.name_field,fs1.Accepted,fs2.pended,fs3.rejected
+                     from field as f 
+                     left join (select field_id as fieldId , status
+                                   ,count(status) as Accepted
+                     from file
+                     where status = 1 
+                     group by field_id,status) as fs1 on f.id= fs1.fieldId 
+ 
+                     left join (select field_id as fieldId , status
+                           ,count(status) as pended
+                     from file
+                     where status = 0
+                     group by field_id,status) as fs2 on f.id= fs2.fieldId 
+ 
+                     left join (select field_id as fieldId , status
+                               ,count(status) as rejected
+                     from file
+                     where status = 3
+                     group by field_id,status) as fs3 on f.id= fs3.fieldId 
+                     where f.status = 1";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inforField = new stdClass();
+                $inforField->id = $row["id"];
+                $inforField->name_field = $row["name_field"];
+                $inforField->accepted = $row["Accepted"];
+                $inforField->pended = $row["pended"];
+                $inforField->rejected = $row["rejected"];
+
+                $listField[] = $inforField;
+            }
+        }
+
+        return $listField;
+    }
 }

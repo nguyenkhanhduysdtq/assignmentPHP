@@ -157,4 +157,11 @@ class fieldController
         $listField = $this->fieldService->getFieldStatusOn();
         return require('../views/homepage.php');
     }
+
+
+    public function getStatiscalStatus()
+    {
+        $listInforField = $this->fieldService->statiscicalStatusOffile();
+        return require('../views/statiscicalField.php');
+    }
 }

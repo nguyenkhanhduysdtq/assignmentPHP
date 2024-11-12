@@ -12,8 +12,7 @@ interface  FieldRepository
     public function getFieldNotAssigned($username);
     public function getFieldDetailTeacher($userId);
     public function getFieldStatusOn();
-
-
+    public function statiscicalStatusOffile();
 }
 
 

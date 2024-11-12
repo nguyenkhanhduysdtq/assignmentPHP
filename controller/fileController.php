@@ -182,6 +182,7 @@ class fileController
             $fileId = $_POST["value_file_id"];
             $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             $user = $this->userService->getInforUserAcceptField($fieldId);
+            $userAccept = $_SESSION["user"]->getter_fullname();
             $check = $this->fileService->updateStatusFile($userId, $fieldId, $status, $fileId);
 
             if ($check == true) {
