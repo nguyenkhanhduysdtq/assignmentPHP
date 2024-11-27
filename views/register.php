@@ -27,22 +27,6 @@
                 </a>
             </div>
 
-            <nav class="navbar">
-                <ul class="navbar__list">
-                    <li>
-                        <a href="#!" class="navbar__item">Item 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 4</a>
-                    </li>
-                </ul>
-            </nav>
 
             <div class="header-action">
                 <a href="./login.php" class="header-action__login">Sign In</a>
@@ -79,10 +63,7 @@
 
             <input type="submit" name="submit-register" value="Sign Up" class="register__input register__input-submit">
 
-            <div class="register__content">
-                <span class="register__question">Have an account?</span>
-                <a href="../views/login.php" name="link-login" class="register__content-link">Sign In</a>
-            </div>
+
 
 
         </form>

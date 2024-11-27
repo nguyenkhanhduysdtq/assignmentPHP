@@ -10,6 +10,8 @@ include_once("../services/UserService.php");
 
 
 session_start();
+
+
 class fileController
 {
     // injection
@@ -32,6 +34,13 @@ class fileController
 
     public function getfileOfField()
     {
+
+
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
+        //page teacher 
         if (isset($_POST["submit"]) || $_SESSION["user"]->getter_role() == 3) {
             $fieldId = $_POST["value_id"];
             $fildeDetail = $this->fileService->getFileDetailField($fieldId);
@@ -39,6 +48,7 @@ class fileController
             return require('../views/detailFile.php');
         }
 
+        //page student 
         if (isset($_POST["submit_t"]) || $_SESSION["user"]->getter_role() == 5) {
             $fieldId = $_POST["value_id"];
             $userId = $_SESSION["user"]->getter_id();
@@ -118,6 +128,11 @@ class fileController
     public function uploadFile()
     {
 
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         if (isset($_POST["submit"])) {
 
             $id = $this->generateUUIDSimple();
@@ -161,6 +176,12 @@ class fileController
 
     public function fileDetail()
     {
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         if (isset($_POST["submit_st"])) {
             $userId = $_SESSION["user"]->getter_id();
             $fieldId = $_POST["value_id"];
@@ -180,11 +201,10 @@ class fileController
             $fieldId = $_POST["value_id"];
             $userId = $_POST["value_user_id"];
             $fileId = $_POST["value_file_id"];
-            $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             $user = $this->userService->getInforUserAcceptField($fieldId);
             $userAccept = $_SESSION["user"]->getter_fullname();
             $check = $this->fileService->updateStatusFile($userId, $fieldId, $status, $fileId);
-
+            $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             if ($check == true) {
                 return require('../views/detailFile.php');
             }

@@ -34,18 +34,42 @@ class authenController
         }
 
 
-        if (isset($_POST["submit-login"])) {
-            $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
-            if ($user->getter_username() != null) {
-                $account = new User();
-                $account->setter_id($user->getter_id());
-                $account->setter_username($user->getter_username());
-                $account->setter_name($user->getter_name());
-                $account->setter_fullname($user->getter_fullname());
-                $account->setter_role($user->getter_role());
-                $account->setter_creat_date($user->getter_creat_date());
 
-                $_SESSION["user"] = $account;
+        if (isset($_POST["submit-login"]) || isset($_SESSION["user"])) {
+
+            if (isset($_POST["submit-login"])) {
+                $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
+                if ($user->getter_username() == null) {
+                    $error = " * Username or password not exist";
+                    return require('../views/login.php');
+                }
+            } else {
+                $user = $_SESSION["user"];
+            }
+
+            if ($user->getter_username() != null ||  isset($_SESSION["user"])) {
+                // $account = new User();
+                // $account->setter_id($user->getter_id());
+                // $account->setter_username($user->getter_username());
+                // $account->setter_name($user->getter_name());
+                // $account->setter_fullname($user->getter_fullname());
+                // $account->setter_role($user->getter_role());
+                // $account->setter_creat_date($user->getter_creat_date());
+
+                // $_SESSION["user"] = $account;
+
+                if (isset($_SESSION["user"])) {
+                    $account = new User();
+                    $account->setter_id($user->getter_id());
+                    $account->setter_username($user->getter_username());
+                    $account->setter_name($user->getter_name());
+                    $account->setter_fullname($user->getter_fullname());
+                    $account->setter_role($user->getter_role());
+                    $account->setter_creat_date($user->getter_creat_date());
+
+                    $_SESSION["user"] = $account;
+                }
+
 
 
 
@@ -63,9 +87,6 @@ class authenController
                     $listField = $this->fieldService->getFieldStatusOn();
                     return require('../views/homepage.php');
                 }
-            } else {
-                $error = " * Username or password not exist";
-                return require('../views/login.php');
             }
         }
     }
@@ -85,10 +106,14 @@ class authenController
             $rpassword = $_POST["cfpass"];
             $user = new User();
 
+            $parts = explode(" ", $_POST["fullname"]);
+            $name = end($parts);
+
             $user->setter_fullname($_POST["fullname"]);
             $user->setter_username($_POST["username"]);
             $user->setter_password($_POST["password"]);
             $user->setter_role(5);
+            $user->setter_name($name);
             $user->setter_creat_date(date("Y-m-d"));
 
 

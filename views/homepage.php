@@ -102,7 +102,7 @@
 
                         <button style="color: <?php $endDateTime = new DateTime($field->getter_end_time());
                                                 $currentDateTime = new DateTime();
-                                                if ($endDateTime <  $currentDateTime) {
+                                                if ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
                                                     echo "red;";
                                                     echo  "cursor: not-allowed;";
                                                 } else {
@@ -112,7 +112,7 @@
                             class="submit" <?php
                                             $endDateTime = new DateTime($field->getter_end_time());
                                             $currentDateTime = new DateTime();
-                                            if ($endDateTime <  $currentDateTime) {
+                                            if ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
                                                 echo "disabled";
                                             } else {
                                                 echo "";
@@ -132,9 +132,9 @@
                             <?php
                             $endDateTime = new DateTime($field->getter_end_time());
                             $currentDateTime = new DateTime();
-                            if ($endDateTime >  $currentDateTime) {
+                            if ($endDateTime >  $currentDateTime || $_SESSION["user"]->getter_role() == 3) {
                                 echo "Nộp hồ sơ";
-                            } else {
+                            } elseif ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
                                 echo "Đã hết hạn";
                             }
 

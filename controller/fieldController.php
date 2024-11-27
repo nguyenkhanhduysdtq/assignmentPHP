@@ -32,6 +32,10 @@ class fieldController
     public function addField()
     {
 
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
 
         if (isset($_POST["submitAddField"])) {
             $check = false;
@@ -78,6 +82,12 @@ class fieldController
 
     public function editField()
     {
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         if (isset($_POST["delete"])) {
             $id = $_POST["value_id"];
 
@@ -106,6 +116,9 @@ class fieldController
             $fieldId = $_POST["value_id"];
             $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             $user = $this->userService->getInforUserAcceptField($fieldId);
+            if ($fildeDetail == []) {
+                $title = "Chưa có hồ sơ ";
+            }
             return require('../views/detailFile.php');
         }
     }
@@ -114,6 +127,13 @@ class fieldController
 
     public function finalEdit()
     {
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
+
         if (isset($_POST["submit_edit"])) {
             $id = $_POST["value_id"];
             $start_date = $_POST["start_date"];
@@ -147,20 +167,35 @@ class fieldController
 
     public function FieldTeacher()
     {
-        $listField = $this->fieldService->getFieldDetailTeacher($_SESSION["user"]->getter_id());
-        return require('../views/homepage.php');
+
+        if (isset($_SESSION["user"])) {
+            $listField = $this->fieldService->getFieldDetailTeacher($_SESSION["user"]->getter_id());
+            return require('../views/homepage.php');
+        } else {
+            return require('../views/login.php');
+        }
     }
 
 
     public function FieldStudent()
     {
-        $listField = $this->fieldService->getFieldStatusOn();
-        return require('../views/homepage.php');
+        if (isset($_SESSION["user"])) {
+            $listField = $this->fieldService->getFieldStatusOn();
+            return require('../views/homepage.php');
+        } else {
+            return require('../views/login.php');
+        }
     }
 
 
     public function getStatiscalStatus()
     {
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         $listInforField = $this->fieldService->statiscicalStatusOffile();
         return require('../views/statiscicalField.php');
     }

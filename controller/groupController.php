@@ -5,6 +5,8 @@ include_once("../services/FieldService.php");
 
 
 session_start();
+
+
 class groupController
 {
     // injection
@@ -21,6 +23,12 @@ class groupController
 
     public function getGroup()
     {
+
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
 
         $listGroup = $this->groupService->getAllGroup();
         $listField = $this->fieldService->getFieldStatusoff();

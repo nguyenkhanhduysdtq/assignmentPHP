@@ -27,10 +27,10 @@
             <nav class="navbar">
                 <ul class="navbar__list">
                     <li>
-                        <a href="#!" class="navbar__item">Phân tài khoản giáo viên</a>
+                        <a href="../navigation/index.php?layer=user&&action=getAccount" class="navbar__item">Phân tài khoản giáo viên</a>
                     </li>
                     <li>
-                        <a href="#!" class="navbar__item">Xét hồ sơ</a>
+                        <a href="../navigation/index.php?layer=field&&action=getStatiscalStatus" class="navbar__item">Xem thống kê hồ sơ</a>
                     </li>
 
                     <li>

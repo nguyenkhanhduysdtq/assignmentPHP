@@ -164,12 +164,20 @@
                                 <button name="submit_tc" class="btn3 btn-details">Xem chi tiết</button>
 
                             </td>
+
                             <input type="hidden" name="value_id" value="<?php echo $fieldId ?>">
                             <input type="hidden" name="value_user_id" value="<?php echo $file->user_id ?>">
                             <input type="hidden" name="value_file_id" value="<?php echo $file->file_id ?>">
                         </tr>
                     </form>
                 <?php
+                }
+                ?>
+                <?php
+                if (isset($title)) {
+                    echo "<td colspan='9'>
+                             <p  style='color: red;'>$title</p>
+                          </td>";
                 }
                 ?>
 

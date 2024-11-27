@@ -27,30 +27,13 @@
                 </a>
             </div>
 
-            <nav class="navbar">
-                <ul class="navbar__list">
-                    <li>
-                        <a href="#!" class="navbar__item">Item 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="navbar__item">Item 4</a>
-                    </li>
-                </ul>
-            </nav>
 
             <div class="header-action">
                 <a href="./login.php" class="btn header-action__login">Sign In</a>
-                <a href="./register.php" class="header-action__signup">Sign Up</a>
+                <a href="../views/register.php" class="header-action__signup">Sign Up</a>
             </div>
         </div>
     </header>
-
     <div class="login">
         <img src="../assets/images/img_login.png" alt="" class="login__img">
 
@@ -74,10 +57,7 @@
 
             <input type="submit" name="submit-login" value="Sign In" class="login__input login__input-submit">
 
-            <div class="login__content">
-                <span class="login__question">You don't have an account?</span>
-                <a href="../views/register.php" name="link-register" class="login__content-link">Sign Up</a>
-            </div>
+           
         </form>
 
     </div>

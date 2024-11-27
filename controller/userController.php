@@ -7,6 +7,8 @@ include_once("../services/UserFieldService.php");
 
 session_start();
 
+
+
 class userController
 {
     public $userService;
@@ -22,6 +24,8 @@ class userController
 
     public function getAccount()
     {
+
+
         $listUser = $this->userService->getAccountTeacher();
         return require('../views/accountViews.php');
     }
@@ -29,6 +33,11 @@ class userController
 
     public function detailAccount()
     {
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         $id = 0;
 
         if (isset($_POST["submit"])) {
@@ -48,6 +57,11 @@ class userController
     //function utill load data
     public function loadInforUserField($userId)
     {
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
         $user = $this->userService->getOneUser($userId);
         $listField = $this->fieldService->getFieldNotAssigned($user->getter_username());
         $listAssignField = $this->userService->getAssignUserAcceptField($user->getter_username());
@@ -57,6 +71,10 @@ class userController
 
     public function assignTeacher()
     {
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
 
         $userId = $_POST["valueUser"];
 
