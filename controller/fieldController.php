@@ -199,4 +199,47 @@ class fieldController
         $listInforField = $this->fieldService->statiscicalStatusOffile();
         return require('../views/statiscicalField.php');
     }
+
+
+    public function addMajor()
+    {
+
+        //revised
+        if (!isset($_SESSION["user"])) {
+            return require('../views/login.php');
+        }
+
+        if (isset($_POST["submitAddField"])) {
+            $check = false;
+            $nameMajor = $_POST["nameMajor"];
+
+            $group = $_POST["group"];
+            $status = 0;
+
+            $field = new Field();
+
+            $field->setter_id($id);
+            $field->setter_nameField($nameMajor);
+            $field->setter_group($group);
+            $field->setter_status($status);
+
+            if ($nameMajor != "" && $group != "") {
+                $check = $this->fieldService->insertField($field);
+            }
+            $listGroup = $this->groupService->getAllGroup();
+            $listField = $this->fieldService->getField();
+            $userOnline = $_SESSION["user"];
+
+            if ($check == true) {
+                // $listField = $this->fieldService->getAllField();
+                // return require('../views/homepageAdmin.php');
+
+
+                $check = true;
+                return require('../views/test.php');
+            }
+
+            return require('../views/test.php');
+        }
+    }
 }

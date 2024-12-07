@@ -39,7 +39,7 @@ a {
   border: 1px solid var(--primary-color);
   text-align: center;
   color: #fff;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, #0056b3, #00408a);
 }
 
 .btn:hover {

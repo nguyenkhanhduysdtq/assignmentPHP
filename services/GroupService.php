@@ -37,4 +37,20 @@ class GroupService implements GroupRepository
 
         return $listGroup;
     }
+
+    public function insertGroup($group)
+    {
+        $conn = $this->connectDB->openConnect();
+
+        $sql = "INSERT INTO exam_groups(name_group,subject_one,subject_two,subject_three)
+        VALUES('{$group->getter_nameGroup()}','{$group->getter_subject_one()}','{$group->getter_subject_two()}','{$group->getter_subject_three()}')
+        ";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        }
+
+
+        return false;
+    }
 }

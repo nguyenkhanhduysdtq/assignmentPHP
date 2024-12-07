@@ -45,6 +45,10 @@ class fileController
             $fieldId = $_POST["value_id"];
             $fildeDetail = $this->fileService->getFileDetailField($fieldId);
             $userAccept = $_SESSION["user"]->getter_fullname();
+            $user = $this->userService->getInforUserAcceptField($fieldId);
+            if ($fildeDetail == []) {
+                $title = "Chưa có hồ sơ ";
+            }
             return require('../views/detailFile.php');
         }
 
@@ -155,21 +159,31 @@ class fileController
             $file->setter_score_subject_three($three_score);
             $file->setter_status($status);
 
+            $checkInsertScore = false;
 
+            $checkInsertUploadFile = false;
 
             $uploadFile = new UploadFile();
 
-            $checkInsertScore = $this->fileService->insertFile($file);
 
-            $uploadFile = $this->handleFile($file->getter_id(),  $fileUpload);
+            if ($one_score != "" && $two_score != "" && $three_score != "" &&  $fileUpload != "") {
+                $checkInsertScore = $this->fileService->insertFile($file);
 
-            $checkInsertUploadFile = $this->uploadFileService->insertInforFile($uploadFile);
+                $uploadFile = $this->handleFile($file->getter_id(),  $fileUpload);
+
+                $checkInsertUploadFile = $this->uploadFileService->insertInforFile($uploadFile);
+            }
+
+
 
             if ($checkInsertScore == true && $checkInsertUploadFile == true) {
                 $check = true;
-                return require('../views/test.php');
+                $fileDetail = $this->fileService->getInforDetail($userId, $fieldId);
+                return require('../views/viewDetailInforStudent.php');
             } else {
-                return require('../views/test1.php');
+
+                $field = $this->fieldService->getFieldEdit($fieldId);
+                return require('../views/detailFileStudent.php');
             }
         }
     }
@@ -209,5 +223,23 @@ class fileController
                 return require('../views/detailFile.php');
             }
         }
+    }
+
+
+    public function getAllFile()
+    {
+        $check = false;
+        $listFileApply = [];
+        $userId = $_SESSION["user"]->getter_id();
+
+
+        $listFileApply = $this->fileService->getInforFileApply($userId);
+
+        if ($listFileApply == []) {
+            $check = true;
+            $title = "Chưa có thông tin";
+        }
+
+        return require('../views/allFileApply.php');
     }
 }

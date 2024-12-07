@@ -58,6 +58,48 @@ class FieldService implements FieldRepository
         return $listField;
     }
 
+    public function getField()
+    {
+
+        $listField = [];
+
+        $conn = $this->connectDB->openConnect();
+
+        $getAllFieldSql = "SELECT * from field ";
+
+
+        $result = $conn->query($getAllFieldSql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $field = new Field();
+                $field->setter_id($row["id"]);
+                $field->setter_nameField($row["name_field"]);
+                $field->setter_start_time($row["start_time"]);
+                $field->setter_end_time($row["end_time"]);
+                $field->setter_status($row["status"]);
+
+
+                $group = new Group();
+                $getGroupSql = "SELECT * from exam_groups WHERE id ={$row['group_id']} ";
+                $resultGroup = $conn->query($getGroupSql);
+                $rowGroup = $resultGroup->fetch_assoc();
+                $group->setter_id($rowGroup["id"]);
+                $group->setter_nameGroup($rowGroup["name_group"]);
+                $group->setter_subject_one($rowGroup["subject_one"]);
+                $group->setter_subject_two($rowGroup["subject_two"]);
+                $group->setter_subject_three($rowGroup["subject_three"]);
+
+
+                $field->setter_group($group);
+
+                $listField[] = $field;
+            }
+        }
+
+        return $listField;
+    }
+
 
     public function insertField($field)
     {
@@ -67,18 +109,16 @@ class FieldService implements FieldRepository
         $newField = new Field();
 
         $newField->setter_nameField($field->getter_nameField());
-        $newField->setter_start_time($field->getter_start_time());
-        $newField->setter_end_time($field->getter_end_time());
         $newField->setter_group($field->getter_group());
-        $newField->setter_status(0);
+        $newField->setter_status(3);
 
 
         $getAllFieldSql = "SELECT * from field";
 
         $result = $conn->query($getAllFieldSql);
 
-        $sql = "INSERT INTO field (name_field,start_time,end_time,group_id,status)
-VALUES ('{$newField->getter_nameField()}' , '{$newField->getter_start_time()}', '{$newField->getter_end_time()}','{$newField->getter_group()}','{$newField->getter_status()}')";
+        $sql = "INSERT INTO field (name_field,group_id,status)
+VALUES ('{$newField->getter_nameField()}','{$newField->getter_group()}','{$newField->getter_status()}')";
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

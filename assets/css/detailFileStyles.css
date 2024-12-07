@@ -49,7 +49,7 @@
  }
 
  th {
-     background-color: #4CAF50;
+     background: linear-gradient(135deg, #0056b3, #00408a);
      color: white;
      font-weight: bold;
  }

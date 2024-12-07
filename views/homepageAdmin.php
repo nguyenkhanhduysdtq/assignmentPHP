@@ -33,7 +33,7 @@
                     </li>
 
                     <li>
-                        <a href="#!" class="navbar__item">Xem thông tin cá nhân</a>
+                        <a href="../navigation/index.php?layer=group&&action=viewAddGroup" class="navbar__item">Thêm khối thi</a>
                     </li>
                 </ul>
             </nav>
@@ -67,8 +67,16 @@
     <div class="container mt-5 mb-5 d-flex justify-content-center">
 
         <h5 class="information1 amend_title">* Thêm ngành</h5>
-        <a href="../navigation/index.php?layer=group&&action=getGroup"><input type="submit" class="add__major" name="add__major" value="Thêm ngành xét tuyển"></a>
+        <div class="handle_major">
+            <div>
+                <a href="../navigation/index.php?layer=group&&action=getGroup"><input type="submit" class="add__major" name="add__major" value="Thêm ngành xét tuyển"></a>
+            </div>
 
+            <div>
+                <a href="../navigation/index.php?layer=group&&action=viewAddMajor"><input type="submit" class="add__major" name="add__major" value="Thêm ngành mới"></a>
+            </div>
+
+        </div>
         <h1 class="title">Danh sách các ngành xét tuyển</h1>
 
         <div class="card px-1 py-4 wrapped">

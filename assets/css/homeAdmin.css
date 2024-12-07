@@ -114,6 +114,12 @@ label.radio input:checked+span {
     cursor: pointer;
 }
 
+.handle_major {
+    display: flex;
+
+}
+
+
 .add__major {
     margin-top: 20px;
     width: 150px;
@@ -207,4 +213,8 @@ label.radio input:checked+span {
 
 .container {
     padding-top: 150px;
+}
+
+.handle_major {
+    display: flex;
 }

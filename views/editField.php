@@ -34,7 +34,7 @@
                     </li>
 
                     <li>
-                        <a href="#!" class="navbar__item">Xem thông tin cá nhân</a>
+                        <a href="../navigation/index.php?layer=group&&action=viewAddGroup" class="navbar__item">Thêm khối thi</a>
                     </li>
                 </ul>
             </nav>

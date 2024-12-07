@@ -196,6 +196,7 @@
     <form action="../navigation/index.php?layer=file&&action=uploadFile" method="post" enctype="multipart/form-data">
         <div class="container">
             <h1>Nghành xét tuyển : <strong style="color: red;"><?php echo $field->getter_nameField() ?></strong> </h1>
+
             <h3>Điền điểm cho từng môn </h3>
             <p style="margin-bottom: 20px;">Khối thi : <strong style="color: red;"><?php echo $field->getter_group()->getter_nameGroup() ?></strong></p>
             <table>
@@ -234,7 +235,34 @@
                 <input name="file" type="file" id="upload">
             </div>
 
-            <button id="submit-button" class="btn2 btn-submit" name="submit">Nộp hồ sơ</button>
+            <?php
+            if (isset($check)) {
+                if ($check == true) {
+
+                    echo " <div class='alert success'>
+                <input type='checkbox' id='alert2' />
+                <label class='close' title='close' for='alert2'>
+                    <i class='icon-remove'></i>
+                </label>
+                <p class='inner'>
+                   Thêm thành công
+                </p>
+            </div>";
+                } else {
+                    echo "  <div class='alert error'>
+                <input type='checkbox' id='alert1' />
+                <label class='close' title='close' for='alert1'>
+                    <i class='icon-remove'></i>
+                </label>
+                <p class='inner'>
+                    <strong>cảnh báo!</strong> Thêm không thành công
+                </p>
+            </div>";
+                }
+            }
+            ?>
+
+            <button style="margin-top: 20px;" id="submit-button" class="btn2 btn-submit" name="submit">Nộp hồ sơ</button>
         </div>
 
         <input type="hidden" value="<?php echo $field->getter_id() ?>" name="value_id">

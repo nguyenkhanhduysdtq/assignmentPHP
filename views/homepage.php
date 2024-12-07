@@ -22,6 +22,20 @@
                     <span class="header__logo-text">My Team</span>
                 </a>
             </div>
+            <?php
+
+            if ($_SESSION["user"]->getter_role() == 5) {
+            ?>
+                <nav class="navbar">
+                    <ul class="navbar__list">
+                        <li>
+                            <a href="../navigation/index.php?layer=file&&action=getAllFile" class="navbar__item">Xem thông tin hồ sơ đã nộp</a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+            <?php } ?>
 
 
             <div class="header-action">

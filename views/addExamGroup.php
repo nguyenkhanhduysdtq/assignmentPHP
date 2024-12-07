@@ -75,7 +75,7 @@
         <div class="form_container">
 
 
-            <h1>Thêm ngành xét tuyển</h1>
+            <h1 style="margin-bottom: 30px;">Nhập thông tin khối thi</h1>
             <?php
             if (isset($check)) {
                 if ($check == true) {
@@ -102,45 +102,28 @@
                 }
             }
             ?>
-            <form action="../navigation/index.php?layer=field&&action=addField" method="post">
+            <form action="../navigation/index.php?layer=group&&action=addGroup" method="post">
                 <div class="form_group">
-                    <label for="nganh">Ngành xét tuyển</label>
-                    <select id="khoi" name="major">
-                        <option value="0">.....</option>
-                        <?php
-                        foreach ($listField as $field) {
-                        ?>
-                            <option value="<?php echo $field->getter_id() ?>"><?php echo $field->getter_nameField() ?></option>
-                        <?php
-                        }
-                        ?>
-
-                    </select>
+                    <label for="nganh">Nhập tên khối thi</label>
+                    <input type="text" class="add_major" name="nameGroup">
                 </div>
+
                 <div class="form_group">
-                    <label for="start_date">Thời Gian Bắt Đầu</label>
-                    <input type="date" id="start_date" name="start_date">
+                    <label for="nganh">Nhập môn thứ 1</label>
+                    <input type="text" class="add_major" name="subjectGroup1">
                 </div>
+
                 <div class="form_group">
-                    <label for="end_date">Thời Gian Kết Thúc</label>
-                    <input type="date" id="end_date" name="end_date">
+                    <label for="nganh">Nhập môn thứ 2</label>
+                    <input type="text" class="add_major" name="subjectGroup2">
                 </div>
+
                 <div class="form_group">
-                    <label for="khoi">Khối Xét Tuyển</label>
-                    <select id="khoi" name="group">
-                        <option value="0">.....</option>
-
-                        <?php
-                        foreach ($listGroup as $examGroup) {
-                        ?>
-                            <option value="<?php echo $examGroup->getter_id() ?>"><?php echo $examGroup->getter_nameGroup() ?></option>
-                        <?php
-                        }
-                        ?>
-
-                    </select>
-
+                    <label for="nganh">Nhập môn thứ 3</label>
+                    <input type="text" class="add_major" name="subjectGroup3">
                 </div>
+
+
                 <button class="submit" name="submitAddField" type="submit">Thêm</button>
             </form>
         </div>

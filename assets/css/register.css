@@ -57,7 +57,7 @@
 }
 
 .register__input-submit {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, #0056b3, #00408a);
   color: #fff;
   transition: all 0.5s ease;
 }

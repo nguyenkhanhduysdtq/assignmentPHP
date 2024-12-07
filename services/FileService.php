@@ -23,7 +23,9 @@ class FileService implements FileRepository
         ";
 
 
-        if ($conn->query($sql) === TRUE) {
+        if (
+            $conn->query($sql) === TRUE
+        ) {
             return true;
         }
 
@@ -172,5 +174,46 @@ class FileService implements FileRepository
     }
 
 
-   
+    public function getInforFileApply($userId)
+    {
+
+        $listFile = [];
+        $conn = $this->connectDB->openConnect();
+        $sql = "SELECT f.status,field.name_field,field.group_id,user.fullname, f.score_subject_one, f.score_subject_two, f.score_subject_three,user.id  
+,field.end_time
+                        from field join file as f on field.id = f.field_id
+                                   JOIN user on user.id = f.user_id
+                        where f.user_id = '{$userId}'";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $fileDetail = new stdClass();
+                $fileDetail->status = $row["status"];
+                $fileDetail->user_id = $row["id"];
+                $fileDetail->name_field = $row["name_field"];
+                $fileDetail->end_time = $row["end_time"];
+                $fileDetail->fullname = $row["fullname"];
+                $fileDetail->score_one = $row["score_subject_one"];
+                $fileDetail->score_two = $row["score_subject_two"];
+                $fileDetail->score_three = $row["score_subject_three"];
+
+                $group = new Group();
+                $getGroupSql = "SELECT * from exam_groups WHERE id ={$row['group_id']} ";
+                $resultGroup = $conn->query($getGroupSql);
+                $rowGroup = $resultGroup->fetch_assoc();
+                $group->setter_id($rowGroup["id"]);
+                $group->setter_nameGroup($rowGroup["name_group"]);
+                $group->setter_subject_one($rowGroup["subject_one"]);
+                $group->setter_subject_two($rowGroup["subject_two"]);
+                $group->setter_subject_three($rowGroup["subject_three"]);
+
+                $fileDetail->group = $group;
+
+                $listFile[] = $fileDetail;
+            }
+        }
+
+        return $listFile;
+    }
 }
