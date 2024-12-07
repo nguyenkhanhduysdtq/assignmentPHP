@@ -129,6 +129,13 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <p><strong>Ngày bắt đầu:</strong> <?php echo htmlspecialchars($field->getter_start_time()); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
                                     <p><strong>Ngày kết thúc:</strong> <?php echo htmlspecialchars($field->getter_end_time()); ?></p>
                                 </div>
                             </div>
@@ -143,6 +150,8 @@
             <?php
             }
             ?>
+
+
 
             <!-- <div class="card-body">
 
@@ -187,7 +196,10 @@
                 <button class="submit_detail">Xem thông tin chi tiết</button>
             </div> -->
 
+
         </div>
+
+
     </div>
 
 </body>

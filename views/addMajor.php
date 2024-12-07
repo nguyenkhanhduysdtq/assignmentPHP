@@ -225,7 +225,7 @@
                     <i class='icon-remove'></i>
                 </label>
                 <p class='inner'>
-                    <strong>cảnh báo!</strong> Thêm không thành công
+                    <strong>cảnh báo!</strong> $checkValidate
                 </p>
             </div>";
             }
@@ -259,7 +259,9 @@
 
         <div class="form-container">
             <form action="../navigation/index.php?layer=field&&action=addMajor" method="post">
+                <p style="color: red; ">* Nhập tên ngành theo đúng quy định trên (viết hoa chữ cái đầu, có dấu ,ít nhất một dấu cách)</p>
                 <div class="form-row">
+
                     <input type="text" placeholder="Tên ngành" name="nameMajor" required>
                     <select id="khoi" name="group">
                         <option value="0" disabled selected>Chọn khối</option>

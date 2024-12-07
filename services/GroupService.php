@@ -53,4 +53,21 @@ class GroupService implements GroupRepository
 
         return false;
     }
+
+    public function checkExistGroup($nameGroup)
+    {
+
+        $conn = $this->connectDB->openConnect();
+
+        $name = ucfirst($nameGroup);
+
+        $sql = "SELECT * FROM exam_groups where name_group = '$name'";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

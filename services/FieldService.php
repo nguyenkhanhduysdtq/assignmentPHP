@@ -291,7 +291,7 @@ VALUES ('{$newField->getter_nameField()}','{$newField->getter_group()}','{$newFi
  
                           join user_field as uf on us.id = uf.user_id 
                           join field on uf.field_id =  field.id
-                          where us.id = '{$userId}' ";
+                          where us.id = '{$userId}' and field.status != 3";
 
         $result = $conn->query($sql);
 
@@ -384,8 +384,8 @@ VALUES ('{$newField->getter_nameField()}','{$newField->getter_group()}','{$newFi
                      from file
                      where status = 3
                      group by field_id,status) as fs3 on f.id= fs3.fieldId 
-                     where f.status = 1";
-
+                     ";
+        // where f.status = 1
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -401,5 +401,21 @@ VALUES ('{$newField->getter_nameField()}','{$newField->getter_group()}','{$newFi
         }
 
         return $listField;
+    }
+
+    public function getFieldFllowingName($nameField)
+    {
+        $conn = $this->connectDB->openConnect();
+
+        $name = ucfirst($nameField);
+
+        $sql = "SELECT * FROM field where name_field = '$name'";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            return true;
+        }
+
+        return false;
     }
 }

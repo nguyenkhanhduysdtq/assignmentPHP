@@ -167,11 +167,14 @@ class fileController
 
 
             if ($one_score != "" && $two_score != "" && $three_score != "" &&  $fileUpload != "") {
-                $checkInsertScore = $this->fileService->insertFile($file);
-
                 $uploadFile = $this->handleFile($file->getter_id(),  $fileUpload);
-
-                $checkInsertUploadFile = $this->uploadFileService->insertInforFile($uploadFile);
+                if ($uploadFile == false) {
+                    $field = $this->fieldService->getFieldEdit($fieldId);
+                    return require('../views/detailFileStudent.php');
+                } else {
+                    $checkInsertScore = $this->fileService->insertFile($file);
+                    $checkInsertUploadFile = $this->uploadFileService->insertInforFile($uploadFile);
+                }
             }
 
 

@@ -8,7 +8,7 @@ class connectDB
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $db = "university_admission";
+        $db = "k72_nhom5";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $db);

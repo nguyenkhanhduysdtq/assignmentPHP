@@ -13,6 +13,7 @@ interface  FieldRepository
     public function getFieldDetailTeacher($userId);
     public function getFieldStatusOn();
     public function statiscicalStatusOffile();
+    public function getFieldFllowingName($name);
 }
 
 

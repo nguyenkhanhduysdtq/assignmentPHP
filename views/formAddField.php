@@ -96,7 +96,7 @@
                     <i class='icon-remove'></i>
                 </label>
                 <p class='inner'>
-                    <strong>cảnh báo!</strong> Thêm không thành công
+                    <strong>cảnh báo!</strong> {$title}
                 </p>
             </div>";
                 }
@@ -117,8 +117,11 @@
 
                     </select>
                 </div>
+                <?php
+                $currentDate = date('m/d/Y'); // Lấy ngày hiện tại theo định dạng YYYY-MM-DD
+                ?>
                 <div class="form_group">
-                    <label for="start_date">Thời Gian Bắt Đầu</label>
+                    <label for="start_date">Thời Gian Bắt Đầu</strong></label>
                     <input type="date" id="start_date" name="start_date">
                 </div>
                 <div class="form_group">

@@ -86,7 +86,7 @@
                     <i class='icon-remove'></i>
                 </label>
                 <p class='inner'>
-                   Thêm thành công
+                   $title
                 </p>
             </div>";
                 } else {
@@ -96,7 +96,7 @@
                     <i class='icon-remove'></i>
                 </label>
                 <p class='inner'>
-                    <strong>cảnh báo!</strong> Thêm không thành công
+                    <strong>cảnh báo!</strong> $title
                 </p>
             </div>";
                 }
@@ -109,17 +109,17 @@
                 </div>
 
                 <div class="form_group">
-                    <label for="nganh">Nhập môn thứ 1</label>
+                    <label for="nganh">Nhập môn thứ 1 <strong style="color: red; font-size: 13px;">* Vui lòng viết có dấu</strong></label>
                     <input type="text" class="add_major" name="subjectGroup1">
                 </div>
 
                 <div class="form_group">
-                    <label for="nganh">Nhập môn thứ 2</label>
+                    <label for="nganh">Nhập môn thứ 2 <strong style="color: red; font-size: 13px;">* Vui lòng viết có dấu</strong></label>
                     <input type="text" class="add_major" name="subjectGroup2">
                 </div>
 
                 <div class="form_group">
-                    <label for="nganh">Nhập môn thứ 3</label>
+                    <label for="nganh">Nhập môn thứ 3 <strong style="color: red; font-size: 13px;">* Vui lòng viết có dấu</strong></label>
                     <input type="text" class="add_major" name="subjectGroup3">
                 </div>
 

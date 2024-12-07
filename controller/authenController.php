@@ -23,6 +23,19 @@ class authenController
         $this->fieldService = new FieldService();
     }
 
+    // bcrypt password
+    function hashPassword($password)
+    {
+        // Sử dụng PASSWORD_BCRYPT để mã hóa
+        return password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    //verify password
+    function verifyPassword($password, $hashedPassword)
+    {
+        return password_verify($password, $hashedPassword);
+    }
+
     public function login()
     {
 
@@ -38,7 +51,7 @@ class authenController
         if (isset($_POST["submit-login"]) || isset($_SESSION["user"])) {
 
             if (isset($_POST["submit-login"])) {
-                $user = $this->userService->checkUser($_POST["username"], $_POST["password"]);
+                $user = $this->userService->checkUser($_POST["username"], md5($_POST["password"]));
                 if ($user->getter_username() == null) {
                     $error = " * Username or password not exist";
                     return require('../views/login.php');
@@ -99,6 +112,7 @@ class authenController
         return require('../views/login.php');
     }
 
+
     public function signUp()
     {
         if (isset($_POST["submit-register"])) {
@@ -111,14 +125,12 @@ class authenController
 
             $user->setter_fullname($_POST["fullname"]);
             $user->setter_username($_POST["username"]);
-            $user->setter_password($_POST["password"]);
+            $user->setter_password(md5($_POST["password"]));
             $user->setter_role(5);
             $user->setter_name($name);
             $user->setter_creat_date(date("Y-m-d"));
 
-
-
-            $result = $this->userService->signUp($user, $rpassword);
+            $result = $this->userService->signUp($user, md5($rpassword));
 
             if ($result == 200) {
                 $check = "Thành công";

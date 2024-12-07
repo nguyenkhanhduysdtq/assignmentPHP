@@ -53,7 +53,18 @@ class fieldController
             $field->setter_group($group);
             $field->setter_status($status);
 
-            $check = $this->fieldService->updateField($field);
+            if ($id == "" || $startDate == "" || $endDate == "" ||  $group == "" || $startDate > $endDate) {
+                $title = "Không được để trống";
+                if ($startDate > $endDate) {
+                    $title = "Ngày bắt đầu phải lớn hơn ngày kết thúc";
+                }
+
+                $listGroup = $this->groupService->getAllGroup();
+                $listField = $this->fieldService->getFieldStatusoff();
+                return require('../views/formAddField.php');
+            } else {
+                $check = $this->fieldService->updateField($field);
+            }
 
             if ($check == true) {
                 // $listField = $this->fieldService->getAllField();
@@ -70,6 +81,7 @@ class fieldController
 
     public function dataHomepage()
     {
+
         if (!isset($_SESSION["user"])) {
             return require('../views/login.php');
         } else {
@@ -200,6 +212,25 @@ class fieldController
         return require('../views/statiscicalField.php');
     }
 
+    function validateInput($input)
+    {
+        // Xóa khoảng trắng thừa đầu và cuối
+        $input = trim($input);
+
+        // Kiểm tra xem chuỗi có khoảng cách thừa giữa các từ không (chỉ cho phép 1 khoảng trắng giữa các từ)
+        if (preg_match('/\s{2,}/', $input)) {
+            return "Chuỗi không được có khoảng cách thừa giữa các từ.";
+        }
+
+        // Kiểm tra chuỗi có chứa ký tự không phải chữ cái (ngoài dấu và chữ cái) không
+        if (!preg_match('/^[\p{L}\s]+$/u', $input)) {
+            return "Chuỗi phải viết có dấu và chỉ chứa chữ cái và khoảng trắng.";
+        }
+
+
+        return 1;
+    }
+
 
     public function addMajor()
     {
@@ -213,17 +244,22 @@ class fieldController
             $check = false;
             $nameMajor = $_POST["nameMajor"];
 
+            $checkValidate = $this->validateInput($nameMajor);
+
             $group = $_POST["group"];
             $status = 0;
 
             $field = new Field();
 
-            $field->setter_id($id);
             $field->setter_nameField($nameMajor);
             $field->setter_group($group);
             $field->setter_status($status);
 
-            if ($nameMajor != "" && $group != "") {
+            if ($this->fieldService->getFieldFllowingName($nameMajor) == true) {
+                $checkValidate = "Tên ngành đã tồn tại";
+            }
+
+            if ($nameMajor != "" && $group != "" && $checkValidate == 1) {
                 $check = $this->fieldService->insertField($field);
             }
             $listGroup = $this->groupService->getAllGroup();
@@ -234,12 +270,10 @@ class fieldController
                 // $listField = $this->fieldService->getAllField();
                 // return require('../views/homepageAdmin.php');
 
-
-                $check = true;
-                return require('../views/test.php');
+                return require('../views/addMajor.php');
             }
 
-            return require('../views/test.php');
+            return require('../views/addMajor.php');
         }
     }
 }
