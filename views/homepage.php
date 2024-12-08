@@ -116,7 +116,8 @@
 
                         <button style="color: <?php $endDateTime = new DateTime($field->getter_end_time());
                                                 $currentDateTime = new DateTime();
-                                                if ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
+                                                $startDateTime = new DateTime($field->getter_start_time());
+                                                if ($endDateTime <  $currentDateTime || $startDateTime > $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
                                                     echo "red;";
                                                     echo  "cursor: not-allowed;";
                                                 } else {
@@ -125,8 +126,9 @@
 
                             class="submit" <?php
                                             $endDateTime = new DateTime($field->getter_end_time());
+                                            $startDateTime = new DateTime($field->getter_start_time());
                                             $currentDateTime = new DateTime();
-                                            if ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
+                                            if ($endDateTime <  $currentDateTime || $startDateTime > $currentDateTime  && $_SESSION["user"]->getter_role() == 5) {
                                                 echo "disabled";
                                             } else {
                                                 echo "";
@@ -146,12 +148,15 @@
                             <?php
                             $endDateTime = new DateTime($field->getter_end_time());
                             $currentDateTime = new DateTime();
-                            if ($endDateTime >  $currentDateTime || $_SESSION["user"]->getter_role() == 3) {
+                            $startDateTime = new DateTime($field->getter_start_time());
+                            if ($endDateTime >  $currentDateTime && $_SESSION["user"]->getter_role() == 3) {
                                 echo "Nộp hồ sơ";
                             } elseif ($endDateTime <  $currentDateTime && $_SESSION["user"]->getter_role() == 5) {
                                 echo "Đã hết hạn";
+                            } elseif ($startDateTime > $currentDateTime  && $_SESSION["user"]->getter_role() == 5) {
+                                echo "Chưa đến ngày";
                             }
-                            
+
 
                             ?></button>
                     </div>
